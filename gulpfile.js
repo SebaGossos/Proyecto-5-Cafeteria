@@ -1,8 +1,13 @@
-const { src, dest, watch, series } = require('gulp');
+const { src, dest, watch, series, parallel } = require('gulp');
+
+// CSS Y SASS
 const sass = require('gulp-sass')(require('sass'));
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
-
+// IMAGENES
+const imagemin = require('gulp-imagemin');
+const webp = require('gulp-webp');
+const avif = require('gulp-avif');
 
 function css(done) {
     // Compilar sass 
@@ -15,9 +20,24 @@ function css(done) {
     done();
 }
 
-function imagenes (){
-    return src('./src/img/**/*')
+function imagenes() {
+    return src('src/img/**/*')
+        .pipe( imagemin({ optimizationLevel: 3 }) )
         .pipe(dest('build/img'))
+}
+
+function versionWebp(){
+    return src('src/img/**/*.{png,jpg}')
+        .pipe( webp() )
+        .pipe( dest('build/img') )
+}
+function versionAvif(){
+    const opciones = {
+        quality: 50
+    }
+    return src('src/img/**/*.{png,jpg}')
+        .pipe( avif( opciones ) )
+        .pipe( dest('build/img') )
 }
 
 function dev (){
@@ -28,4 +48,6 @@ function dev (){
 exports.css = css;
 exports.dev = dev;
 exports.imagenes = imagenes;
-exports.default = series( imagenes, css, dev );
+exports.versionWebp = versionWebp
+exports.versionAvif = versionAvif
+exports.default = series( css, imagenes, versionWebp, versionAvif, dev );
