@@ -130,7 +130,4 @@ dist
 .pnp.*
 
 # Sass
-.sass-cache/
-*.css.map
-*.sass.map
-*.scss.map
+Cafeteria/src/
