@@ -130,6 +130,7 @@ dist
 .pnp.*
 
 # Sass
-src/
-scss/
-.scss
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
