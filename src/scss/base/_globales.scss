@@ -8,7 +8,7 @@ html{
     box-sizing: inherit;
 }
 body{
-    font-family: v.$fuentePrincipal;
+    font-family: v.$fuenteSecundaria;
     font-size: 1.6rem;
     background-color: v.$cafeClaro;
 }
@@ -18,6 +18,11 @@ p{
 }
 a{
     text-decoration: none;
+}
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 img{
     max-width: 100%;
